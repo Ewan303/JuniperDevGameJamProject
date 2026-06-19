@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://m3x018vnniui"]
+
+[ext_resource type="PackedScene" uid="uid://banqhm010xqcb" path="res://new folder/bingus.blend" id="1_eh75v"]
+
+[node name="Bingus" type="StaticBody3D" unique_id=1003056364]
+
+[node name="bingus" parent="." unique_id=101977784 instance=ExtResource("1_eh75v")]
