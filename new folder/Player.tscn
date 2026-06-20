@@ -1,5 +1,61 @@
 [gd_scene format=3 uid="uid://62tg1rk80w56"]
 
-[node name="Node3D" type="Node3D" unique_id=2097208028]
+[ext_resource type="Script" uid="uid://8otl0pdeuxi4" path="res://new folder/player.gd" id="1_s3do0"]
+[ext_resource type="Texture2D" uid="uid://fqc1ebbf2opw" path="res://new folder/PlayerIdle.png" id="2_mdld2"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=941407992]
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3do0"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mdld2")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3do0"]
+radius = 17.0
+height = 68.0
+
+[node name="Player" type="CharacterBody2D" unique_id=604103213]
+script = ExtResource("1_s3do0")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_s3do0")
+animation = &"dash"
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=266404000]
+shape = SubResource("CapsuleShape2D_s3do0")
+
+[node name="AirJumpTimer" type="Timer" parent="." unique_id=1968269332]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="CooldownDash" type="Timer" parent="." unique_id=1403773534]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.1
+one_shot = true

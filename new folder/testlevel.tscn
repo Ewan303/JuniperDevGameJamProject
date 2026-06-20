@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://v4gqwhh8vua1"]
+
+[ext_resource type="PackedScene" uid="uid://62tg1rk80w56" path="res://new folder/Player.tscn" id="1_jl64p"]
+
+[sub_resource type="TileSet" id="TileSet_odba2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl64p"]
+size = Vector2(208.5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unwm7"]
+size = Vector2(208.5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odba2"]
+size = Vector2(483, 10)
+
+[node name="testlevel" type="Node2D" unique_id=66397613]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=916425171]
+tile_set = SubResource("TileSet_odba2")
+
+[node name="Player" parent="." unique_id=604103213 instance=ExtResource("1_jl64p")]
+position = Vector2(110, -85)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=278486972]
+position = Vector2(242, 5)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1505205153]
+position = Vector2(-347, 212)
+shape = SubResource("RectangleShape2D_jl64p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=351767952]
+position = Vector2(-585, 96)
+shape = SubResource("RectangleShape2D_unwm7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1725860952]
+shape = SubResource("RectangleShape2D_odba2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=850137810]
