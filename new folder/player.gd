@@ -6,13 +6,15 @@ enum PLAYERSTATE {
 	FLOOR,
 	FALL,
 	JUMP,
-	DASH
+	DASH,
+	WALLSLIDE,
+	WALLJUMP
 }
 
 @onready var sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var airjumptimer: Timer = %AirJumpTimer
 @onready var cooldownDash: Timer = %CooldownDash
-
+@onready var rayWallSlide: RayCast2D = %RayWallSlide
 
 
 # Constant velocities
@@ -20,6 +22,7 @@ const FALL_V := 500.0
 const WALK_V := 200.0
 const JUMP_V := 500.0
 const DASH_V = 600.0
+const WALLSLIDE_V = 500.0
 
 # Other constants
 const JUMP_D := 1000.0
@@ -27,9 +30,11 @@ const DASH_LEN = 200.0
 
 # Variables
 var activeState := PLAYERSTATE.FALL
+var facingDir := 1.0
 var canDash := false
 var dashJumpBuffer := false
 var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/2
 
 
 # Update character with func _physics_process and _ready
@@ -94,7 +99,14 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.FALL)
 # Movement of player character
 func movement() -> void:
-	var input_dir := signf(Input.get_axis("move_left","move_right"))
-	if input_dir:
-		sprite.flip_h = (0 > input_dir)
-	velocity.x = input_dir * WALK_V
+	var inputDir := signf(Input.get_axis("move_left","move_right"))
+	if inputDir:
+		sprite.flip_h = (0 > inputDir)
+		facingDir = inputDir
+		rayWallSlide.position.x = inputDir * absf(rayWallSlide.position.x)
+		rayWallSlide.target_position.x = inputDir * absf(rayWallSlide.target_position.x)
+		rayWallSlide
+	velocity.x = inputDir * WALK_V
+
+func is_input_toward_facing() -> bool:
+	return signf(Input.get_axis("move_left","move_right")) == facingDir

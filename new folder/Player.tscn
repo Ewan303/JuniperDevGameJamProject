@@ -44,9 +44,10 @@ script = ExtResource("1_s3do0")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_s3do0")
-animation = &"dash"
+animation = &"idle"
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=266404000]
+unique_name_in_owner = true
 shape = SubResource("CapsuleShape2D_s3do0")
 
 [node name="AirJumpTimer" type="Timer" parent="." unique_id=1968269332]
@@ -59,3 +60,7 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="RayWallSlide" type="RayCast2D" parent="." unique_id=1454726169]
+unique_name_in_owner = true
+target_position = Vector2(21, 0)
