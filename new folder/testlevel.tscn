@@ -4,20 +4,17 @@
 
 [sub_resource type="TileSet" id="TileSet_odba2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqyr0"]
+size = Vector2(10.5, 362)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl64p"]
 size = Vector2(208.5, 10)
-
-[sub_resource type="QuadMesh" id="QuadMesh_tnpr2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unwm7"]
 size = Vector2(208.5, 10)
 
-[sub_resource type="QuadMesh" id="QuadMesh_dxij8"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odba2"]
 size = Vector2(483, 10)
-
-[sub_resource type="QuadMesh" id="QuadMesh_6lc5d"]
 
 [node name="testlevel" type="Node2D" unique_id=66397613]
 
@@ -30,27 +27,19 @@ position = Vector2(110, -85)
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=278486972]
 position = Vector2(242, 5)
 
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1263859554]
+position = Vector2(-236.25, 37)
+shape = SubResource("RectangleShape2D_rqyr0")
+
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1505205153]
 position = Vector2(-347, 212)
 shape = SubResource("RectangleShape2D_jl64p")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D/CollisionShape2D3" unique_id=401091952]
-scale = Vector2(208, 10)
-mesh = SubResource("QuadMesh_tnpr2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=351767952]
 position = Vector2(-585, 96)
 shape = SubResource("RectangleShape2D_unwm7")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D/CollisionShape2D" unique_id=1190834653]
-scale = Vector2(-208.47406, 10.270252)
-mesh = SubResource("QuadMesh_dxij8")
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1725860952]
 shape = SubResource("RectangleShape2D_odba2")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D/CollisionShape2D2" unique_id=1332835716]
-scale = Vector2(482.00003, 10)
-mesh = SubResource("QuadMesh_6lc5d")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=850137810]
