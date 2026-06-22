@@ -132,7 +132,7 @@ script = ExtResource("1_s3do0")
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_s3do0")
 animation = &"walk"
-frame_progress = 0.52733433
+frame_progress = 0.47890618
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=266404000]
 unique_name_in_owner = true

@@ -32,6 +32,7 @@ const WALLJUMP_LEN := 30.0
 
 # Variables
 var activeState := PLAYERSTATE.FALL
+var savedPosition := Vector2.ZERO
 var facingDir := 1.0
 var canDash := false
 var dashJumpBuffer := false
@@ -74,7 +75,11 @@ func switch_state(state: PLAYERSTATE) -> void:
 		PLAYERSTATE.WALLSLIDE:
 			sprite.play("wallslide")
 			velocity.y = 0
-			
+		PLAYERSTATE.WALLJUMP:
+			sprite.play("jump")
+			velocity.y = -(WALLJUMP_V)
+			set_facing_direction(-facingDir)
+			savedPosition = position
 func process_state(delta: float) -> void:
 	match activeState:
 		PLAYERSTATE.FALL:
@@ -96,9 +101,17 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.FALL)
 			elif Input.is_action_just_pressed("jump"):
 				switch_state(PLAYERSTATE.JUMP)
-		PLAYERSTATE.JUMP:
+		PLAYERSTATE.JUMP, PLAYERSTATE.WALLJUMP:
 			velocity.y = move_toward(velocity.y,0,JUMP_D * delta)
-			movement()
+			if activeState == PLAYERSTATE.WALLJUMP:
+				var dist := absf(position.x - savedPosition.x)
+				if dist >= WALLJUMP_LEN or can_wall_slide():
+					activeState = PLAYERSTATE.JUMP
+				else:
+					movement(facingDir)
+			
+			if activeState != PLAYERSTATE.WALLJUMP:
+				movement()
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
 				velocity.y = 0
 				switch_state(PLAYERSTATE.FALL)
@@ -110,16 +123,22 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.FLOOR)
 			elif not can_wall_slide():
 				switch_state(PLAYERSTATE.FALL)
+			elif Input.is_action_just_pressed("jump"):
+				switch_state(PLAYERSTATE.WALLJUMP)
 # Movement of player character
-func movement() -> void:
-	var inputDir := signf(Input.get_axis("move_left","move_right"))
-	if inputDir:
-		sprite.flip_h = (0 > inputDir)
-		facingDir = inputDir
-		rayWallSlide.position.x = inputDir * absf(rayWallSlide.position.x)
-		rayWallSlide.target_position.x = inputDir * absf(rayWallSlide.target_position.x)
-		rayWallSlide.force_raycast_update()
+func movement(inputDir: float = 0) -> void:
+	if inputDir == 0:
+		inputDir = signf(Input.get_axis("move_left","move_right"))
+	set_facing_direction(inputDir)
 	velocity.x = inputDir * WALK_V
+
+func set_facing_direction(dir: float) -> void:
+	if dir:
+		sprite.flip_h = (0 > dir)
+		facingDir = dir
+		rayWallSlide.position.x = dir * absf(rayWallSlide.position.x)
+		rayWallSlide.target_position.x = dir * absf(rayWallSlide.target_position.x)
+		rayWallSlide.force_raycast_update()
 
 func is_input_toward_facing() -> bool:
 	return signf(Input.get_axis("move_left","move_right")) == facingDir
