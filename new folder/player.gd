@@ -23,12 +23,12 @@ const WALK_V := 300.0
 const JUMP_V := 550.0
 const DASH_V := 600.0
 const WALLSLIDE_V := 500.0
-const WALLJUMP_V := 550.0
+const WALLJUMP_V := 400.0
 
 # Other constants
 const JUMP_D := 1000.0
 const DASH_LEN := 200.0
-const WALLJUMP_LEN := 30.0
+const WALLJUMP_LEN := 40.0
 
 # Variables
 var activeState := PLAYERSTATE.FALL
@@ -37,7 +37,7 @@ var facingDir := 1.0
 var canDash := false
 var dashJumpBuffer := false
 var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/4
+var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/2.5
 
 
 # Update character with func _physics_process and _ready
