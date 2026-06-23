@@ -23,12 +23,12 @@ const WALK_V := 300.0
 const JUMP_V := 550.0
 const DASH_V := 600.0
 const WALLSLIDE_V := 500.0
-const WALLJUMP_V := 400.0
+const WALLJUMP_V := 550.0
 
 # Other constants
 const JUMP_D := 1000.0
-const DASH_LEN := 200.0
-const WALLJUMP_LEN := 40.0
+const DASH_LEN := 100.0
+const WALLJUMP_LEN := 30.0
 
 # Variables
 var activeState := PLAYERSTATE.FALL
@@ -37,7 +37,7 @@ var facingDir := 1.0
 var canDash := false
 var dashJumpBuffer := false
 var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/2.5
+var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/4
 
 
 # Update character with func _physics_process and _ready
@@ -60,26 +60,37 @@ func switch_state(state: PLAYERSTATE) -> void:
 			sprite.play("fall")
 			if prevState == PLAYERSTATE.FLOOR:
 				airjumptimer.start()
+				
 		PLAYERSTATE.FLOOR:
 			canDash = true
+			
 		PLAYERSTATE.JUMP:
 			sprite.play("jump")
 			velocity.y = -(JUMP_V)
 			airjumptimer.stop()
+			
 		PLAYERSTATE.DASH:
 			if cooldownDash.time_left > 0:
 				activeState = prevState
 				return
 			sprite.play("dash")
 			velocity.y = 0
+			set_facing_direction(signf(Input.get_axis("move_left","move_right")))
+			velocity.x = facingDir * DASH_V
+			savedPosition = position
+			canDash = prevState == PLAYERSTATE.FLOOR or prevState == PLAYERSTATE.WALLSLIDE
+			dashJumpBuffer = false
 		PLAYERSTATE.WALLSLIDE:
 			sprite.play("wallslide")
 			velocity.y = 0
+			canDash = true
+			
 		PLAYERSTATE.WALLJUMP:
 			sprite.play("jump")
 			velocity.y = -(WALLJUMP_V)
 			set_facing_direction(-facingDir)
 			savedPosition = position
+			
 func process_state(delta: float) -> void:
 	match activeState:
 		PLAYERSTATE.FALL:
@@ -91,6 +102,8 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.JUMP)
 			elif is_input_toward_facing() and can_wall_slide():
 				switch_state(PLAYERSTATE.WALLSLIDE)
+			elif Input.is_action_just_pressed("move_dash") and canDash:
+				switch_state(PLAYERSTATE.DASH)
 		PLAYERSTATE.FLOOR:
 			if Input.get_axis("move_left","move_right"):
 				sprite.play("walk")
@@ -101,6 +114,8 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.FALL)
 			elif Input.is_action_just_pressed("jump"):
 				switch_state(PLAYERSTATE.JUMP)
+			elif Input.is_action_just_pressed("move_dash"):
+				switch_state(PLAYERSTATE.DASH)
 		PLAYERSTATE.JUMP, PLAYERSTATE.WALLJUMP:
 			velocity.y = move_toward(velocity.y,0,JUMP_D * delta)
 			if activeState == PLAYERSTATE.WALLJUMP:
@@ -115,6 +130,8 @@ func process_state(delta: float) -> void:
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
 				velocity.y = 0
 				switch_state(PLAYERSTATE.FALL)
+			elif Input.is_action_just_pressed("move_dash") and canDash:
+				switch_state(PLAYERSTATE.DASH)
 		PLAYERSTATE.WALLSLIDE:
 			velocity.y = move_toward(velocity.y,WALLSLIDE_V,WALLSLIDE_GRAV * delta)
 			movement()
@@ -125,6 +142,25 @@ func process_state(delta: float) -> void:
 				switch_state(PLAYERSTATE.FALL)
 			elif Input.is_action_just_pressed("jump"):
 				switch_state(PLAYERSTATE.WALLJUMP)
+			
+		PLAYERSTATE.DASH:
+			cooldownDash.start()
+			if is_on_floor():
+				airjumptimer.start()
+			if Input.is_action_just_pressed("jump"):
+				dashJumpBuffer = true
+			var dist := absf(position.x - savedPosition.x)
+			if dist >= DASH_LEN or signf(get_last_motion().x) != facingDir:
+				if dashJumpBuffer and airjumptimer.time_left > 0:
+					switch_state(PLAYERSTATE.JUMP)
+				elif is_on_floor():
+					switch_state(PLAYERSTATE.FLOOR)
+				else:
+					switch_state(PLAYERSTATE.FALL)
+			elif can_wall_slide():
+				switch_state(PLAYERSTATE.WALLSLIDE)
+			elif Input.is_action_just_pressed("move_dash") and canDash:
+				switch_state(PLAYERSTATE.DASH)
 # Movement of player character
 func movement(inputDir: float = 0) -> void:
 	if inputDir == 0:
