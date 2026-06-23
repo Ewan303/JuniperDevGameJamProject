@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://doifjl6coc3b6" path="res://PlayerFallSheet.png" id="2_awgsj"]
 [ext_resource type="Texture2D" uid="uid://b2siy721xovmm" path="res://PlayerRunSheet.png" id="3_ty05w"]
 [ext_resource type="Texture2D" uid="uid://cgg1r2un6s6hk" path="res://PlayerJumpSheet.png" id="4_jusrm"]
+[ext_resource type="Texture2D" uid="uid://ccc1j7smh7052" path="res://PlayerWallSlideSheet.png" id="6_jusrm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0rwmx"]
 atlas = ExtResource("2_awgsj")
@@ -107,7 +108,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -152,7 +153,10 @@ animations = [{
 "name": &"walk",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jusrm")
+}],
 "loop": 1,
 "name": &"wallslide",
 "speed": 5.0
@@ -168,8 +172,13 @@ script = ExtResource("1_s3do0")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_s3do0")
-animation = &"fall"
-frame_progress = 0.24093425
+animation = &"wallslide"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1420934356]
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Area2D" unique_id=1865403081]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape2D_s3do0")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=266404000]
 unique_name_in_owner = true
@@ -189,3 +198,15 @@ one_shot = true
 [node name="RayWallSlide" type="RayCast2D" parent="." unique_id=1454726169]
 unique_name_in_owner = true
 target_position = Vector2(21, 0)
+
+[node name="Abilities" type="Node2D" parent="." unique_id=67478228]
+unique_name_in_owner = true
+
+[node name="ability1" type="Node2D" parent="Abilities" unique_id=1541715645]
+
+[node name="ability2" type="Node2D" parent="Abilities" unique_id=336954806]
+
+[node name="ability3" type="Node2D" parent="Abilities" unique_id=77468166]
+
+[node name="ability4" type="Node2D" parent="Abilities" unique_id=1053710856]
+position = Vector2(17, 0)

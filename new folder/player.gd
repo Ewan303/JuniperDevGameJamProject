@@ -16,7 +16,6 @@ enum PLAYERSTATE {
 @onready var cooldownDash: Timer = %CooldownDash
 @onready var rayWallSlide: RayCast2D = %RayWallSlide
 
-
 # Constant velocities
 const FALL_V := 700.0
 const WALK_V := 300.0
@@ -39,6 +38,7 @@ var dashJumpBuffer := false
 var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gravity"))/4
 
+# 
 
 # Update character with func _physics_process and _ready
 func _ready() -> void:
