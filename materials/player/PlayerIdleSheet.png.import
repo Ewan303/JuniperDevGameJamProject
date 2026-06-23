@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doifjl6coc3b6"
-path="res://.godot/imported/PlayerFallSheet.png-ed614158f814064d51933be68b54eaa7.ctex"
+uid="uid://cyjy7os8gv56t"
+path="res://.godot/imported/PlayerIdleSheet.png-485a272e43c950111b9cd18a162f2025.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlayerFallSheet.png"
-dest_files=["res://.godot/imported/PlayerFallSheet.png-ed614158f814064d51933be68b54eaa7.ctex"]
+source_file="res://materials/player/PlayerIdleSheet.png"
+dest_files=["res://.godot/imported/PlayerIdleSheet.png-485a272e43c950111b9cd18a162f2025.ctex"]
 
 [params]
 

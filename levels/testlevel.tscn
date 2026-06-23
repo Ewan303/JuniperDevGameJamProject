@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://v4gqwhh8vua1"]
 
-[ext_resource type="PackedScene" uid="uid://62tg1rk80w56" path="res://new folder/Player.tscn" id="1_jl64p"]
+[ext_resource type="PackedScene" uid="uid://62tg1rk80w56" path="res://objects/player/Player.tscn" id="1_jl64p"]
 
 [sub_resource type="TileSet" id="TileSet_odba2"]
 
