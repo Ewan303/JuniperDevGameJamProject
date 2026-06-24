@@ -14,7 +14,7 @@ size = Vector2(208.5, 10)
 size = Vector2(208.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odba2"]
-size = Vector2(483, 10)
+size = Vector2(1289.5, 10)
 
 [node name="testlevel" type="Node2D" unique_id=66397613]
 
@@ -22,10 +22,11 @@ size = Vector2(483, 10)
 tile_set = SubResource("TileSet_odba2")
 
 [node name="Player" parent="." unique_id=604103213 instance=ExtResource("1_jl64p")]
-position = Vector2(110, -85)
+position = Vector2(235, -43)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=278486972]
 position = Vector2(242, 5)
+collision_mask = 15
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1263859554]
 position = Vector2(-236.25, 37)
@@ -40,6 +41,5 @@ position = Vector2(-585, 96)
 shape = SubResource("RectangleShape2D_unwm7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1725860952]
+position = Vector2(403.25, 0)
 shape = SubResource("RectangleShape2D_odba2")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=850137810]

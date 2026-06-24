@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://8nk2p5enh7qt"]
+
+[ext_resource type="Script" uid="uid://ianhwl3v7rdp" path="res://objects/ability4/ability_4.gd" id="1_ndknl"]
+[ext_resource type="Texture2D" uid="uid://ckgu84e8nvlhd" path="res://materials/ability4/BettersFeeProjectile.png" id="2_qmasu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odba2"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s721b"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndknl"]
+radius = 20.0
+
+[node name="Ability4" type="CharacterBody2D" unique_id=957064037]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_ndknl")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=277182520]
+unique_name_in_owner = true
+texture = ExtResource("2_qmasu")
+
+[node name="Lifetime" type="Timer" parent="." unique_id=871194561]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="ProjectileCollider" type="CollisionShape2D" parent="." unique_id=632618513]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_odba2")
+
+[node name="ExplosionArea2D" type="Area2D" parent="." unique_id=1342084875]
+unique_name_in_owner = true
+
+[node name="Hurtbox" type="CollisionShape2D" parent="ExplosionArea2D" unique_id=1238057429]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_s721b")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1610778734]
+
+[node name="CollisionTrigger" type="CollisionShape2D" parent="Area2D" unique_id=1165588878]
+shape = SubResource("CircleShape2D_ndknl")

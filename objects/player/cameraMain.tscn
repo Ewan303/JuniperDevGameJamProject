@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dcwrfgq8a46ko"]
+
+[sub_resource type="GDScript" id="GDScript_fbyvf"]
+script/source = "extends Camera2D
+
+@export var target: Node2D = null
+@onready var offsetPos := Vector2.ZERO
+@export var smoothSpeed: float = 3
+
+@export var noiseSpeed: float = 150.0
+@export var noiseStrength: float = 0.02
+#@export var noiseDecay: float = 3.0
+
+@onready var noise: FastNoiseLite = FastNoiseLite.new()
+@onready var rand: RandomNumberGenerator = RandomNumberGenerator.new()
+@onready var noiseOffset: Vector2
+var noise_i: float = 0.0
+
+var targetCamera: Node2D
+
+func _ready():
+	target = get_tree().current_scene.find_child(\"Player\")
+	targetCamera = target.find_child(\"TargetCamera\")
+	self.position = targetCamera.position + offsetPos
+
+	# Randomize generated noise
+	rand.randomize()
+	noise.seed = rand.randi()
+
+func _physics_process(delta) -> void:
+	noiseOffset = getNoiseOffset(delta)
+	print(targetCamera.position)
+	self.position = self.position.lerp(targetCamera.global_position,0.9 * delta)
+
+# Function to get noise offset from generated noise
+func getNoiseOffset(delta: float) -> Vector2:
+	noise_i += delta * noiseSpeed
+
+	# Set the x value of each call to get_noise_2d to a different value
+	# so x and y will be reading from unrelated areas of noise
+	# Return vector with y and z offsets since we only move Up/Down/Left/Right
+	return Vector2(
+		noise.get_noise_2d(1, noise_i) * noiseStrength,
+		noise.get_noise_2d(100, noise_i) * noiseStrength)
+"
+
+[node name="Camera2D" type="Camera2D" unique_id=1095663502]
+script = SubResource("GDScript_fbyvf")
