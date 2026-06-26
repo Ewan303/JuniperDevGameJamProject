@@ -20,15 +20,21 @@ var velocity_sign := 1.0
 @onready var lifetime: Timer = %Lifetime
 
 func setup(facingDir: float, x: float, p: CharacterBody2D, pos: Vector2) -> void:
+	sprite = %Sprite 
+	
 	if facingDir > 0:
+		sprite.flip_h = false
 		max_speed = clamp(400 * clamp(1 + x/ 50, 0, 5), 0, 1000)
 		rotation_speed = clamp(4 * clamp(1 + x / 50, 0, 5), 0, 16)
 	else:
+		sprite.flip_h = true
 		max_speed = clamp(400 * clamp(-1 + x / 50, -5, 0), -1000, 0)
 		rotation_speed = clamp(4 * clamp(-1 + x / 50, -5, 0), -16, 0)
+	
 	speed = max_speed
 	player = p
 	self.global_position = pos
+
 
 func _ready():
 	lifetime.timeout.connect(_on_life_timer_timeout)
@@ -44,7 +50,6 @@ func _ready():
 	velocity = dir * speed
 
 func _physics_process(delta: float) -> void:
-	# Keep the boomerang spinning smoothly
 	if sprite:
 		sprite.rotation += rotation_speed * delta
 		

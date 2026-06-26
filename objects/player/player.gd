@@ -78,7 +78,7 @@ var WALLSLIDE_GRAV: float = (ProjectSettings.get_setting("physics/2d/default_gra
 
 # Stats
 const MAX_HP := 100
-var hp := 1000000
+var hp := 100
 
 # ==============================================================================
 # 5. BUILT-IN ENGINE FUNCTIONS
@@ -292,10 +292,10 @@ func handle_input_and_camera(delta: float) -> void:
 	cameraMain.position = cameraMain.position.lerp(targetCamera.global_position, 7 * delta)
 
 func handle_ability_execution() -> void:
-	if Input.is_action_just_pressed("ability") and hp > 10 and canUseAbility:
+	if Input.is_action_just_pressed("ability") and hp > 10 and canUseAbility and not activeState == PLAYERSTATE.WALLSLIDE:
 		if _try_execute_ability():
 			canUseAbility = false
-			hp -= 10
+			hp -= 5
 			cooldown_ability.start() # Start ability cooldown upon activation
 
 func set_facing_direction(dir: float) -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cay0rmxm841m1"
-path="res://.godot/imported/PokerDealerChip.png-222db8c60e92286082bb295ace91f9bd.ctex"
+uid="uid://dh7f7i0u2eoym"
+path="res://.godot/imported/CasinoPristineTSv4.png-280c782c3520a90385484328bbedd435.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PokerDealerChip.png"
-dest_files=["res://.godot/imported/PokerDealerChip.png-222db8c60e92286082bb295ace91f9bd.ctex"]
+source_file="res://materials/levels/tilemaps/casinopristine/CasinoPristineTSv4.png"
+dest_files=["res://.godot/imported/CasinoPristineTSv4.png-280c782c3520a90385484328bbedd435.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2qiyfvak8v4y"
-path="res://.godot/imported/FloorRunnerStunnedSheet.png-8347cca8f9634756ff34ee753bcd307f.ctex"
+uid="uid://brxmokufnoegq"
+path="res://.godot/imported/FloorRunnerRecoverSheet.png-c3f745ae8b4ed21123ab38b19da7fe1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FloorRunnerStunnedSheet.png"
-dest_files=["res://.godot/imported/FloorRunnerStunnedSheet.png-8347cca8f9634756ff34ee753bcd307f.ctex"]
+source_file="res://materials/enemies/enemyrunner/FloorRunnerRecoverSheet.png"
+dest_files=["res://.godot/imported/FloorRunnerRecoverSheet.png-c3f745ae8b4ed21123ab38b19da7fe1a.ctex"]
 
 [params]
 

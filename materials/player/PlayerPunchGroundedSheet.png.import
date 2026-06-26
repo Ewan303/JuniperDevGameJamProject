@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjqe01lucwyut"
-path="res://.godot/imported/PlayerKickFalling.png-a82d7b8abfb4248ba964c6b0d901fbd3.ctex"
+uid="uid://bso440368ivob"
+path="res://.godot/imported/PlayerPunchGroundedSheet.png-4b129260042653371bfd0194b6e65c47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlayerKickFalling.png"
-dest_files=["res://.godot/imported/PlayerKickFalling.png-a82d7b8abfb4248ba964c6b0d901fbd3.ctex"]
+source_file="res://materials/player/PlayerPunchGroundedSheet.png"
+dest_files=["res://.godot/imported/PlayerPunchGroundedSheet.png-4b129260042653371bfd0194b6e65c47.ctex"]
 
 [params]
 

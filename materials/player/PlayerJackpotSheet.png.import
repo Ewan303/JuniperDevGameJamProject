@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brvw4trxp8cca"
-path="res://.godot/imported/FloorRunnerRunningDishlessSheet.png-8b591442dca4a42429eee2c8a300cf47.ctex"
+uid="uid://cqgr0gtoqh24a"
+path="res://.godot/imported/PlayerJackpotSheet.png-70b2e3475749c0c413024add4d5c536e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FloorRunnerRunningDishlessSheet.png"
-dest_files=["res://.godot/imported/FloorRunnerRunningDishlessSheet.png-8b591442dca4a42429eee2c8a300cf47.ctex"]
+source_file="res://materials/player/PlayerJackpotSheet.png"
+dest_files=["res://.godot/imported/PlayerJackpotSheet.png-70b2e3475749c0c413024add4d5c536e.ctex"]
 
 [params]
 

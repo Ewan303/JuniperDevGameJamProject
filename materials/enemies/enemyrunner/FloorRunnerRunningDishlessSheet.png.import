@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bieerijo3nsdh"
-path="res://.godot/imported/FloorRunnerDownedSheet.png-0c81fa9ed4fdd661651cb4cfbf96ff9f.ctex"
+uid="uid://brvw4trxp8cca"
+path="res://.godot/imported/FloorRunnerRunningDishlessSheet.png-ea674323c53d9f74d26109624ef6b380.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FloorRunnerDownedSheet.png"
-dest_files=["res://.godot/imported/FloorRunnerDownedSheet.png-0c81fa9ed4fdd661651cb4cfbf96ff9f.ctex"]
+source_file="res://materials/enemies/enemyrunner/FloorRunnerRunningDishlessSheet.png"
+dest_files=["res://.godot/imported/FloorRunnerRunningDishlessSheet.png-ea674323c53d9f74d26109624ef6b380.ctex"]
 
 [params]
 
