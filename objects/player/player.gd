@@ -40,11 +40,11 @@ enum PLAYERSTATE {
 
 # Velocities
 const FALL_V := 700.0
-const WALK_V := 250.0
-const JUMP_V := 550.0
+const WALK_V := 225.0
+const JUMP_V := 500.0
 const DASH_V := 625.0
 const WALLSLIDE_V := 500.0
-const WALLJUMP_V := 550.0
+const WALLJUMP_V := 500.0
 
 # Movement distances & modifiers
 const JUMP_D := 1000.0

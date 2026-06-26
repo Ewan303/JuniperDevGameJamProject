@@ -1,0 +1,14 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://g72ppri5411f"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_j2ssn"]
+var/navigation/name = &"navigation"
+var/navigation/type = 22
+var/navigation/value = NodePath("NavigationAgent2D")
+var/navigation/hint = 0
+var/navigation/hint_string = ""
+
+[sub_resource type="BTSelector" id="BTSelector_rt2nm"]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_j2ssn")
+root_task = SubResource("BTSelector_rt2nm")
