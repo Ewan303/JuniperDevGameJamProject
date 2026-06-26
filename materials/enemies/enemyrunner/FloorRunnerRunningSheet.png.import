@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b32cqtxklrjwj"
-path="res://.godot/imported/BettersFeeProjectilegood.png-08c4a0e07eb6c0304d0abb03601901f5.ctex"
+uid="uid://jtcoal631jp0"
+path="res://.godot/imported/FloorRunnerRunningSheet.png-509808e74892f7cc389b100c4b098995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BettersFeeProjectilegood.png"
-dest_files=["res://.godot/imported/BettersFeeProjectilegood.png-08c4a0e07eb6c0304d0abb03601901f5.ctex"]
+source_file="res://materials/enemies/enemyrunner/FloorRunnerRunningSheet.png"
+dest_files=["res://.godot/imported/FloorRunnerRunningSheet.png-509808e74892f7cc389b100c4b098995.ctex"]
 
 [params]
 

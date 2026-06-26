@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sxbyfodn36ba"
-path="res://.godot/imported/FloorRunnerDishExplodeSheet.png-1cd33f5bda6c5131301ff7b45c985012.ctex"
+uid="uid://2qiyfvak8v4y"
+path="res://.godot/imported/FloorRunnerStunnedSheet.png-c0e7e1ea68a86284be02ad158ca5a095.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FloorRunnerDishExplodeSheet.png"
-dest_files=["res://.godot/imported/FloorRunnerDishExplodeSheet.png-1cd33f5bda6c5131301ff7b45c985012.ctex"]
+source_file="res://materials/enemies/enemyrunner/FloorRunnerStunnedSheet.png"
+dest_files=["res://.godot/imported/FloorRunnerStunnedSheet.png-c0e7e1ea68a86284be02ad158ca5a095.ctex"]
 
 [params]
 

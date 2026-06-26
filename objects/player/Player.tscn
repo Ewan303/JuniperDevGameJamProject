@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8otl0pdeuxi4" path="res://objects/player/player.gd" id="1_aqcbf"]
 [ext_resource type="Texture2D" uid="uid://doifjl6coc3b6" path="res://materials/player/PlayerFallSheet.png" id="2_aqcbf"]
-[ext_resource type="Texture2D" uid="uid://cqgr0gtoqh24a" path="res://PlayerJackpotSheet.png" id="2_n1h8g"]
+[ext_resource type="Texture2D" uid="uid://cqgr0gtoqh24a" path="res://materials/player/PlayerJackpotSheet.png" id="2_n1h8g"]
 [ext_resource type="Texture2D" uid="uid://nwcq4hv2jgwb" path="res://materials/player/PlayerDashSheet.png" id="2_t2uaq"]
 [ext_resource type="Texture2D" uid="uid://cyjy7os8gv56t" path="res://materials/player/PlayerIdleSheet.png" id="3_gskgj"]
 [ext_resource type="Texture2D" uid="uid://cgg1r2un6s6hk" path="res://materials/player/PlayerJumpSheet.png" id="4_06mnu"]
@@ -10,6 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://ccc1j7smh7052" path="res://materials/player/PlayerWallSlideSheet.png" id="6_ndjxb"]
 [ext_resource type="Texture2D" uid="uid://dq8brjv1riui" path="res://materials/player/PlayerThrowFallingSheetl.png" id="6_veo1v"]
 [ext_resource type="Texture2D" uid="uid://bfpfr2adnve7n" path="res://materials/player/PlayerThrowGroundedSheet.png" id="7_n1h8g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lalkq"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3do0"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2uaq"]
+size = Vector2(40, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wy8b"]
 atlas = ExtResource("2_n1h8g")
@@ -345,28 +356,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lalkq"]
-radius = 16.0
-height = 64.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3do0"]
-radius = 16.0
-height = 64.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2uaq"]
-size = Vector2(40, 64)
-
 [node name="Player" type="CharacterBody2D" unique_id=604103213]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_aqcbf")
-
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
-unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_s3do0")
-animation = &"ability2"
-frame = 4
-frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1420934356]
 unique_name_in_owner = true
@@ -387,7 +380,7 @@ one_shot = true
 [node name="CooldownAbility" type="Timer" parent="." unique_id=1403773534]
 unique_name_in_owner = true
 process_callback = 0
-wait_time = 0.15
+wait_time = 0.25
 one_shot = true
 
 [node name="RayWallSlide" type="RayCast2D" parent="." unique_id=1454726169]
@@ -415,6 +408,7 @@ unique_name_in_owner = true
 [node name="CameraMain" type="Camera2D" parent="." unique_id=1869939998]
 unique_name_in_owner = true
 top_level = true
+zoom = Vector2(2, 2)
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=694807542]
 unique_name_in_owner = true
@@ -422,3 +416,9 @@ unique_name_in_owner = true
 [node name="Attackbox" type="CollisionShape2D" parent="AttackArea" unique_id=622923560]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_t2uaq")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_s3do0")
+animation = &"idle"
+frame_progress = 0.13077287

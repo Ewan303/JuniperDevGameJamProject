@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqgr0gtoqh24a"
-path="res://.godot/imported/PlayerJackpotSheet.png-e082391939b3b220d563f9709d8484dc.ctex"
+uid="uid://bieerijo3nsdh"
+path="res://.godot/imported/FloorRunnerDownedSheet.png-dc34db3980c087c546bb46ed65909961.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlayerJackpotSheet.png"
-dest_files=["res://.godot/imported/PlayerJackpotSheet.png-e082391939b3b220d563f9709d8484dc.ctex"]
+source_file="res://materials/enemies/enemyrunner/FloorRunnerDownedSheet.png"
+dest_files=["res://.godot/imported/FloorRunnerDownedSheet.png-dc34db3980c087c546bb46ed65909961.ctex"]
 
 [params]
 

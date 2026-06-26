@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlqrla60vrald"]
 
 [ext_resource type="Script" uid="uid://q7qb8vb1c7gi" path="res://objects/ability3/ability_3.gd" id="1_fr5li"]
-[ext_resource type="Texture2D" uid="uid://dsgxe418sont7" path="res://materials/ability3/AceProjectile.png" id="2_2ebv7"]
+[ext_resource type="Texture2D" uid="uid://dox0m3uh5amsu" path="res://materials/ability3/AceProjectile.png" id="2_2ebv7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_odba2"]
 radius = 13.0
@@ -16,6 +16,7 @@ script = ExtResource("1_fr5li")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=277182520]
 unique_name_in_owner = true
+position = Vector2(-1, 7)
 texture = ExtResource("2_2ebv7")
 
 [node name="Lifetime" type="Timer" parent="." unique_id=871194561]

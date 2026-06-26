@@ -16,9 +16,9 @@ var speed := 0
 
 func setup(facingDir: float,x: float, pos: Vector2) -> void:
 	if facingDir > 0:
-		speed = clamp(200 * clamp(1 + x / 50, 0, 5), 0, 800)
+		speed = clamp(200 * clamp(1 + x / 50, 0, 5), 0, 600)
 	else:
-		speed = clamp(200 * clamp(-1 + x / 50, -5, 0), -800, 0)
+		speed = clamp(200 * clamp(-1 + x / 50, -5, 0), -600, 0)
 	self.global_position = pos
 func _ready():
 	lifetime.timeout.connect(_on_life_timer_timeout) 

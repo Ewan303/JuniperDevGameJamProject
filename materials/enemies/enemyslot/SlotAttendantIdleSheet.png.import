@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpiev02w5tavb"
-path="res://.godot/imported/PokerDealerChipThrow.png-38b6af67aa73e084f70ec071a8b6e73a.ctex"
+uid="uid://0st8j8ah1jxo"
+path="res://.godot/imported/SlotAttendantIdleSheet.png-aa8aa189b82af68b5f98cac1d5ce0097.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PokerDealerChipThrow.png"
-dest_files=["res://.godot/imported/PokerDealerChipThrow.png-38b6af67aa73e084f70ec071a8b6e73a.ctex"]
+source_file="res://materials/enemies/enemyslot/SlotAttendantIdleSheet.png"
+dest_files=["res://.godot/imported/SlotAttendantIdleSheet.png-aa8aa189b82af68b5f98cac1d5ce0097.ctex"]
 
 [params]
 

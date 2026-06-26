@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ckgu84e8nvlhd" path="res://materials/ability4/BettersFeeProjectile.png" id="2_qmasu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_odba2"]
-radius = 13.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s721b"]
 radius = 64.0
@@ -19,6 +19,7 @@ script = ExtResource("1_ndknl")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=277182520]
 unique_name_in_owner = true
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_qmasu")
 
 [node name="Lifetime" type="Timer" parent="." unique_id=871194561]

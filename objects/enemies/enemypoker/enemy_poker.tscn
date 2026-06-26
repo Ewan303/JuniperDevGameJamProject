@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b1s66c7lt1o0p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sstgc"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wim0f"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woegi"]
+size = Vector2(40, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n1h8g"]
+animations = [{
+"frames": [],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyPoker" type="CharacterBody2D" unique_id=288457623]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=475494713]
+unique_name_in_owner = true
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Area2D" unique_id=1781437520]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape2D_sstgc")
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=2110089875]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape2D_wim0f")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1347640315]
+unique_name_in_owner = true
+
+[node name="Attackbox" type="CollisionShape2D" parent="AttackArea" unique_id=827988366]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_woegi")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=672934830]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_n1h8g")
