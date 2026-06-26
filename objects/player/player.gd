@@ -52,8 +52,9 @@ const DASH_LEN := 200.0
 const WALLJUMP_LEN := 30.0
 
 # Ability Configuration
-const ABILITY4_PROJ = preload("res://objects/ability4/ability4.tscn")
-const ABILITY_POOL := [PLAYERSTATE.ABILITYONE, PLAYERSTATE.ABILITYFOUR]
+const ABILITY3_PROJ := preload("res://objects/ability3/ability3.tscn")
+const ABILITY4_PROJ := preload("res://objects/ability4/ability4.tscn")
+const ABILITY_POOL := [PLAYERSTATE.ABILITYONE,PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYFOUR]
 
 # ==============================================================================
 # 4. STATE & GAMEPLAY VARIABLES
@@ -141,6 +142,27 @@ func switch_state(new_state: PLAYERSTATE) -> void:
 			canDash = false 
 			dashJumpBuffer = false
 			
+		PLAYERSTATE.ABILITYTHREE:
+			if prevState == PLAYERSTATE.FLOOR:
+				sprite.play("throwstand")
+			elif prevState == PLAYERSTATE.FALL or prevState == PLAYERSTATE.JUMP:
+				sprite.play("throwair")
+			
+			# Instantiate and throw projectile
+			var b = ABILITY3_PROJ.instantiate()
+			b.global_position = ability_3.global_position
+			
+			if facingDir > 0:
+				b.max_speed = clamp(400 * clamp(1 + velocity.x / 50, 0, 5), 0, 1000)
+				b.rotation_speed = clamp(4 * clamp(1 + velocity.x / 50, 0, 5), 0, 16)
+			else:
+				b.max_speed = clamp(400 * clamp(-1 + velocity.x / 50, -5, 0), -1000, 0)
+				b.rotation_speed = clamp(4 * clamp(-1 + velocity.x / 50, -5, 0), -16, 0)
+			print(b.max_speed)
+			b.speed = b.max_speed
+			b.player = self
+			
+			get_tree().current_scene.add_child(b)
 		PLAYERSTATE.ABILITYFOUR:
 			if prevState == PLAYERSTATE.FLOOR:
 				sprite.play("throwstand")
@@ -152,9 +174,9 @@ func switch_state(new_state: PLAYERSTATE) -> void:
 			b.global_position = ability_4.global_position
 			
 			if facingDir > 0:
-				b.speed_x = clamp(200 * clamp(1 + velocity.x / 50, 0, 5), 0, 800)
+				b.speed = clamp(200 * clamp(1 + velocity.x / 50, 0, 5), 0, 800)
 			else:
-				b.speed_x = clamp(200 * clamp(-1 + velocity.x / 50, -5, 0), -800, 0)
+				b.speed = clamp(200 * clamp(-1 + velocity.x / 50, -5, 0), -800, 0)
 				
 			get_tree().current_scene.add_child(b)
 
@@ -232,10 +254,10 @@ func process_state(delta: float) -> void:
 			elif can_wall_slide():
 				switch_state(PLAYERSTATE.WALLSLIDE)
 				
-		PLAYERSTATE.ABILITYTWO, PLAYERSTATE.ABILITYTHREE:
+		PLAYERSTATE.ABILITYTWO:
 			pass
 			
-		PLAYERSTATE.ABILITYFOUR:
+		PLAYERSTATE.ABILITYFOUR, PLAYERSTATE.ABILITYTHREE:
 			if is_on_floor():
 				switch_state(PLAYERSTATE.FLOOR)
 			elif can_wall_slide():

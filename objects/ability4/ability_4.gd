@@ -6,7 +6,7 @@ const damage := 200
 var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var dir := Vector2.RIGHT
-var speed_x := 0
+var speed := 0
 
 @onready var sprite: Sprite2D = %Sprite
 @onready var lifetime: Timer = %Lifetime
@@ -14,8 +14,7 @@ var speed_x := 0
 func _ready():
 	lifetime.timeout.connect(_on_life_timer_timeout) 
 	lifetime.start()
-	velocity.x = dir.x * speed_x
-	velocity.y = 0.0
+	velocity = dir * speed
 
 func _physics_process(delta: float) -> void:
 	velocity.y += GRAV * delta
