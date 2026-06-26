@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8otl0pdeuxi4" path="res://objects/player/player.gd" id="1_aqcbf"]
 [ext_resource type="Texture2D" uid="uid://doifjl6coc3b6" path="res://materials/player/PlayerFallSheet.png" id="2_aqcbf"]
+[ext_resource type="Texture2D" uid="uid://cqgr0gtoqh24a" path="res://PlayerJackpotSheet.png" id="2_n1h8g"]
 [ext_resource type="Texture2D" uid="uid://nwcq4hv2jgwb" path="res://materials/player/PlayerDashSheet.png" id="2_t2uaq"]
 [ext_resource type="Texture2D" uid="uid://cyjy7os8gv56t" path="res://materials/player/PlayerIdleSheet.png" id="3_gskgj"]
 [ext_resource type="Texture2D" uid="uid://cgg1r2un6s6hk" path="res://materials/player/PlayerJumpSheet.png" id="4_06mnu"]
@@ -9,6 +10,26 @@
 [ext_resource type="Texture2D" uid="uid://ccc1j7smh7052" path="res://materials/player/PlayerWallSlideSheet.png" id="6_ndjxb"]
 [ext_resource type="Texture2D" uid="uid://dq8brjv1riui" path="res://materials/player/PlayerThrowFallingSheetl.png" id="6_veo1v"]
 [ext_resource type="Texture2D" uid="uid://bfpfr2adnve7n" path="res://materials/player/PlayerThrowGroundedSheet.png" id="7_n1h8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wy8b"]
+atlas = ExtResource("2_n1h8g")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpetc"]
+atlas = ExtResource("2_n1h8g")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dqnc"]
+atlas = ExtResource("2_n1h8g")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muiv1"]
+atlas = ExtResource("2_n1h8g")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4sky"]
+atlas = ExtResource("2_n1h8g")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1h8g"]
 atlas = ExtResource("2_t2uaq")
@@ -148,6 +169,26 @@ region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s3do0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wy8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpetc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dqnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muiv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4sky")
+}],
+"loop": 0,
+"name": &"ability2",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n1h8g")
@@ -323,7 +364,9 @@ script = ExtResource("1_aqcbf")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1118539607]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_s3do0")
-animation = &"throwstand"
+animation = &"ability2"
+frame = 4
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1420934356]
 unique_name_in_owner = true
@@ -356,7 +399,7 @@ unique_name_in_owner = true
 
 [node name="ability2" type="Node2D" parent="Abilities" unique_id=336954806]
 unique_name_in_owner = true
-position = Vector2(0, 34)
+position = Vector2(0, 32)
 
 [node name="ability3" type="Node2D" parent="Abilities" unique_id=77468166]
 unique_name_in_owner = true

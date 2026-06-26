@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-var GRAV: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 enum STATE { THROW, PEAK, RETURN }
 var current_state := STATE.THROW
 
@@ -13,11 +11,24 @@ var return_acceleration := 1800.0
 var rotation_speed := 0.0
 var player: CharacterBody2D = null
 
+const damage := 100
+
 # New variable to remember the original movement direction sign
 var velocity_sign := 1.0
 
 @onready var sprite: Sprite2D = %Sprite
 @onready var lifetime: Timer = %Lifetime
+
+func setup(facingDir: float, x: float, p: CharacterBody2D, pos: Vector2) -> void:
+	if facingDir > 0:
+		max_speed = clamp(400 * clamp(1 + x/ 50, 0, 5), 0, 1000)
+		rotation_speed = clamp(4 * clamp(1 + x / 50, 0, 5), 0, 16)
+	else:
+		max_speed = clamp(400 * clamp(-1 + x / 50, -5, 0), -1000, 0)
+		rotation_speed = clamp(4 * clamp(-1 + x / 50, -5, 0), -16, 0)
+	speed = max_speed
+	player = p
+	self.global_position = pos
 
 func _ready():
 	lifetime.timeout.connect(_on_life_timer_timeout)

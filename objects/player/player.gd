@@ -52,9 +52,10 @@ const DASH_LEN := 200.0
 const WALLJUMP_LEN := 30.0
 
 # Ability Configuration
+const ABILITY2_PROJ := preload("res://objects/ability2/ability2.tscn")
 const ABILITY3_PROJ := preload("res://objects/ability3/ability3.tscn")
 const ABILITY4_PROJ := preload("res://objects/ability4/ability4.tscn")
-const ABILITY_POOL := [PLAYERSTATE.ABILITYONE,PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYFOUR]
+const ABILITY_POOL := [PLAYERSTATE.ABILITYONE,PLAYERSTATE.ABILITYTWO,PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYFOUR]
 
 # ==============================================================================
 # 4. STATE & GAMEPLAY VARIABLES
@@ -104,7 +105,11 @@ func switch_state(new_state: PLAYERSTATE) -> void:
 	
 	match activeState:
 		PLAYERSTATE.FALL:
-			sprite.play("fall")
+			match prevState:
+				PLAYERSTATE.ABILITYONE, PLAYERSTATE.ABILITYTWO, PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYFOUR:
+					pass
+				_:
+					sprite.play("fall")
 			if prevState == PLAYERSTATE.FLOOR:
 				airjumptimer.start()
 			
@@ -112,7 +117,11 @@ func switch_state(new_state: PLAYERSTATE) -> void:
 			canDash = true
 			
 		PLAYERSTATE.JUMP:
-			sprite.play("jump")
+			match prevState:
+				PLAYERSTATE.ABILITYONE, PLAYERSTATE.ABILITYTWO, PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYFOUR:
+					pass
+				_:
+					sprite.play("jump")
 			velocity.y = -JUMP_V
 			airjumptimer.stop()
 			
@@ -141,45 +150,40 @@ func switch_state(new_state: PLAYERSTATE) -> void:
 			# Consume dash charge immediately upon use
 			canDash = false 
 			dashJumpBuffer = false
-			
+			print(nextAbility)
+
+		PLAYERSTATE.ABILITYTWO:
+			if prevState == PLAYERSTATE.FLOOR:
+				sprite.play("ability2")
+			elif prevState == PLAYERSTATE.FALL or prevState == PLAYERSTATE.JUMP:
+				sprite.play("throwair")
+				
+			var b = ABILITY2_PROJ.instantiate()
+			b.setup(self,ability_2.global_position)
+			get_tree().current_scene.add_child(b)
+			print(nextAbility)
+
 		PLAYERSTATE.ABILITYTHREE:
 			if prevState == PLAYERSTATE.FLOOR:
 				sprite.play("throwstand")
 			elif prevState == PLAYERSTATE.FALL or prevState == PLAYERSTATE.JUMP:
 				sprite.play("throwair")
-			
-			# Instantiate and throw projectile
+				
 			var b = ABILITY3_PROJ.instantiate()
-			b.global_position = ability_3.global_position
-			
-			if facingDir > 0:
-				b.max_speed = clamp(400 * clamp(1 + velocity.x / 50, 0, 5), 0, 1000)
-				b.rotation_speed = clamp(4 * clamp(1 + velocity.x / 50, 0, 5), 0, 16)
-			else:
-				b.max_speed = clamp(400 * clamp(-1 + velocity.x / 50, -5, 0), -1000, 0)
-				b.rotation_speed = clamp(4 * clamp(-1 + velocity.x / 50, -5, 0), -16, 0)
-			print(b.max_speed)
-			b.speed = b.max_speed
-			b.player = self
-			
+			b.setup(facingDir, velocity.x, self, ability_3.global_position)
 			get_tree().current_scene.add_child(b)
+			print(nextAbility)
+
 		PLAYERSTATE.ABILITYFOUR:
 			if prevState == PLAYERSTATE.FLOOR:
 				sprite.play("throwstand")
 			elif prevState == PLAYERSTATE.FALL or prevState == PLAYERSTATE.JUMP:
 				sprite.play("throwair")
-			
-			# Instantiate and throw projectile
-			var b = ABILITY4_PROJ.instantiate()
-			b.global_position = ability_4.global_position
-			
-			if facingDir > 0:
-				b.speed = clamp(200 * clamp(1 + velocity.x / 50, 0, 5), 0, 800)
-			else:
-				b.speed = clamp(200 * clamp(-1 + velocity.x / 50, -5, 0), -800, 0)
 				
+			var b = ABILITY4_PROJ.instantiate()
+			b.setup(facingDir, velocity.x, ability_4.global_position)
 			get_tree().current_scene.add_child(b)
-
+			print(nextAbility)
 
 func process_state(delta: float) -> void:
 	handle_input_and_camera(delta)
@@ -254,10 +258,7 @@ func process_state(delta: float) -> void:
 			elif can_wall_slide():
 				switch_state(PLAYERSTATE.WALLSLIDE)
 				
-		PLAYERSTATE.ABILITYTWO:
-			pass
-			
-		PLAYERSTATE.ABILITYFOUR, PLAYERSTATE.ABILITYTHREE:
+		PLAYERSTATE.ABILITYFOUR, PLAYERSTATE.ABILITYTHREE, PLAYERSTATE.ABILITYTWO:
 			if is_on_floor():
 				switch_state(PLAYERSTATE.FLOOR)
 			elif can_wall_slide():
@@ -344,7 +345,10 @@ func _try_execute_ability() -> bool:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "dashstart":
 		sprite.play("dash")
+	elif sprite.animation == "throwair" and activeState == PLAYERSTATE.FALL:
+		sprite.play("fall")
+	elif sprite.animation == "throwair" and activeState == PLAYERSTATE.JUMP:
+		sprite.play("jump")
 
 func _on_cooldown_ability_timeout() -> void:
-	print("Cooldown of ability refreshed!")
 	canUseAbility = true
